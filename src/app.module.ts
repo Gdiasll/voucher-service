@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { VouncherModule } from './application/vouncher.module';
+import { VoucherModule } from './application/voucher.module';
 
 @Module({
-  imports: [VouncherModule],
+  imports: [VoucherModule],
   controllers: [],
   providers: [],
 })

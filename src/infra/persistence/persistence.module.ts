@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
-import { VouncherRepository } from 'src/application/vouncher.repository';
-import { PrismaVouncherRepository } from './prisma/repositories/prisma-vouncher.repository';
+import { VoucherRepository } from 'src/application/voucher.repository';
+import { PrismaVoucherRepository } from './prisma/repositories/prisma-voucher.repository';
 
 @Module({
   providers: [
     PrismaService,
     {
-      provide: VouncherRepository,
-      useClass: PrismaVouncherRepository,
+      provide: VoucherRepository,
+      useClass: PrismaVoucherRepository,
     },
   ],
-  exports: [PrismaService, VouncherRepository],
+  exports: [PrismaService, VoucherRepository],
 })
 export class PersistenceModule {}

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateVouncherDto {
+export class CreateVoucherDto {
   @ApiProperty({ required: true })
   expiresIn: Date;
 }

@@ -19,11 +19,11 @@ enum StatusEnum {
   EXPIRED
 }
 
-model Vouncher {
+model Voucher {
   id        String @id @default(uuid()) @db.Uuid
   status    String
   createdAt DateTime @default(now())
   expiresIn DateTime
 
-  @@map("vouncher")
+  @@map("voucher")
 }

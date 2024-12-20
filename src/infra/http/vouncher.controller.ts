@@ -8,50 +8,54 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateVouncherDto } from './dto/create-vouncher.dto';
-import { CreateVouncherUseCase } from 'src/application/use-case/create-vouncher';
-import { GetVouncherUseCase } from 'src/application/use-case/get-vouncher';
-import { DeleteVouncherUseCase } from 'src/application/use-case/delete-vouncher';
+import { CreateVoucherDto } from './dto/create-voucher.dto';
+import { CreateVoucherUseCase } from 'src/application/use-case/create-voucher';
+import { GetVoucherUseCase } from 'src/application/use-case/get-voucher';
+import { DeleteVoucherUseCase } from 'src/application/use-case/delete-voucher';
 import {
-  UpdateVouncherDtoClass,
-  UpdateVouncherSchema,
-} from './dto/update-vouncher.dto';
+  UpdateVoucherDtoClass,
+  UpdateVoucherSchema,
+} from './dto/update-voucher.dto';
 import { ZodValidationPipe } from './pipe/zod-validation.pipe';
-import { UpdateVouncherUseCase } from 'src/application/use-case/update-vouncher';
+import { UpdateVoucherUseCase } from 'src/application/use-case/update-voucher';
+import { UseVoucherUseCase } from 'src/application/use-case/use-voucher';
 
-@Controller('/vouncher')
-export class VouncherController {
+@Controller('/voucher')
+export class VoucherController {
   constructor(
-    private createVouncherUseCase: CreateVouncherUseCase,
-    private getVouncherUseCase: GetVouncherUseCase,
-    private deleteVouncherUseCase: DeleteVouncherUseCase,
-    private updateVouncherUseCase: UpdateVouncherUseCase,
+    private createVoucherUseCase: CreateVoucherUseCase,
+    private getVoucherUseCase: GetVoucherUseCase,
+    private deleteVoucherUseCase: DeleteVoucherUseCase,
+    private updateVoucherUseCase: UpdateVoucherUseCase,
+    private useVoucherUseCase: UseVoucherUseCase,
   ) {}
 
   @Post('')
-  create(@Body() dto: CreateVouncherDto) {
-    return this.createVouncherUseCase.execute(dto);
+  create(@Body() dto: CreateVoucherDto) {
+    return this.createVoucherUseCase.execute(dto);
   }
 
   @Get('')
   getAll() {
-    return this.getVouncherUseCase.execute();
+    return this.getVoucherUseCase.execute();
   }
 
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body(new ZodValidationPipe(UpdateVouncherSchema))
-    dto: UpdateVouncherDtoClass,
+    @Body(new ZodValidationPipe(UpdateVoucherSchema))
+    dto: UpdateVoucherDtoClass,
   ) {
-    return this.updateVouncherUseCase.execute({ id, ...dto });
+    return this.updateVoucherUseCase.execute({ id, ...dto });
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return this.deleteVouncherUseCase.execute({ id });
+    return this.deleteVoucherUseCase.execute({ id });
   }
 
   @Patch(':id/use')
-  use() {}
+  use(@Param('id') id: string) {
+    return this.useVoucherUseCase.execute({ id });
+  }
 }

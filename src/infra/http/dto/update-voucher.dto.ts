@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { z } from 'zod';
-import { statusEnum } from 'src/domain/vouncher';
+import { statusEnum } from 'src/domain/voucher';
 
-export const UpdateVouncherSchema = z.object({
+export const UpdateVoucherSchema = z.object({
   expiresIn: z
     .string()
     .optional()
@@ -21,9 +21,9 @@ export const UpdateVouncherSchema = z.object({
     .optional(),
 });
 
-export type UpdateVouncherDto = z.infer<typeof UpdateVouncherSchema>;
+export type UpdateVoucherDto = z.infer<typeof UpdateVoucherSchema>;
 
-export class UpdateVouncherDtoClass {
+export class UpdateVoucherDtoClass {
   @ApiProperty({ required: false })
   expiresIn?: Date;
 

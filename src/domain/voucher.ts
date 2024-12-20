@@ -5,15 +5,15 @@ export enum statusEnum {
   USED = 'USED',
   EXPIRED = 'EXPIRED',
 }
-export interface VouncherProps {
+export interface VoucherProps {
   id?: string;
   createdAt?: Date;
   expiresIn: Date;
   status: statusEnum;
 }
 
-export class Vouncher extends Entity<VouncherProps> {
-  constructor(props: VouncherProps) {
+export class Voucher extends Entity<VoucherProps> {
+  constructor(props: VoucherProps) {
     super(props);
   }
 
