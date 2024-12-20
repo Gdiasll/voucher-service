@@ -4,11 +4,15 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateVoucherDto } from './dto/create-voucher.dto';
+import {
+  CreateVoucherDtoClass,
+  CreateVoucherSchema,
+} from './dto/create-voucher.dto';
 import { CreateVoucherUseCase } from 'src/application/use-case/create-voucher';
 import { GetVoucherUseCase } from 'src/application/use-case/get-voucher';
 import { DeleteVoucherUseCase } from 'src/application/use-case/delete-voucher';
@@ -31,7 +35,10 @@ export class VoucherController {
   ) {}
 
   @Post('')
-  create(@Body() dto: CreateVoucherDto) {
+  create(
+    @Body(new ZodValidationPipe(CreateVoucherSchema))
+    dto: CreateVoucherDtoClass,
+  ) {
     return this.createVoucherUseCase.execute(dto);
   }
 
@@ -42,7 +49,7 @@ export class VoucherController {
 
   @Put(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body(new ZodValidationPipe(UpdateVoucherSchema))
     dto: UpdateVoucherDtoClass,
   ) {
@@ -50,12 +57,12 @@ export class VoucherController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  delete(@Param('id', ParseUUIDPipe) id: string) {
     return this.deleteVoucherUseCase.execute({ id });
   }
 
   @Patch(':id/use')
-  use(@Param('id') id: string) {
+  use(@Param('id', ParseUUIDPipe) id: string) {
     return this.useVoucherUseCase.execute({ id });
   }
 }
